@@ -1,0 +1,22 @@
+EF Core Notes
+--------------
+
+1 Add Connection String => Server=localhost;Database=DBName;Uid=root;Password=root
+
+2 Package to install (MySql) => dotnet add package Microsoft.EntityFrameworkCore.Design and dotnet add package Pomelo.EntityFrameworkCore.MySql
+
+3 Install & Update dotnet EF tool => dotnet tool install --global dotnet-ef and dotnet tool update --global dotnet-ef
+3.1 dotnet ef migrations add AddMigrationName
+3.2 dotnet ef database update
+
+****************************************************************************************
+*                                                                                      *
+*  4 Scaffold MySql Database =>                                                        *
+* dotnet ef dbcontext scaffold Name=YourConnectionStringName                           *
+* Pomelo.EntityFrameworkCore.MySql --output-dir Models --context-dir Data --           *
+* namespace DBName.Models --context-namespace DBName.Data --context                    *
+* DBNameContext -f --no-onconfiguring                                                  *
+*                                                                                      *
+* dotnet add package Microsoft.AspNetCore.Mvc.NewtonSoftJson                           *
+*                                                                                      *
+****************************************************************************************/
