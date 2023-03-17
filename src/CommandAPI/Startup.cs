@@ -30,7 +30,8 @@ namespace CommandAPI
 			services.AddDbContext<CommandContext>(opt => opt.UseMySql
 			(Configuration.GetConnectionString("MysqlConnection")));
 			services.AddControllers();
-			services.AddScoped<ICommandAPIRepo, MockCommandAPIRepo>();
+			//services.AddScoped<ICommandAPIRepo, MockCommandAPIRepo>();
+			services.AddScoped<ICommandAPIRepo, SqlCommandAPIRepo>();
 		}
 
 		// This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
