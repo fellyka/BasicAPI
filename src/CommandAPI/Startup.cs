@@ -1,3 +1,4 @@
+using System.Net.Mime;
 using System.Data;
 using System.Text;
 using System.Reflection.Emit;
@@ -17,6 +18,7 @@ using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Configuration;
 using Microsoft.EntityFrameworkCore;
 using  MySql.Data.MySqlClient;
+using AutoMapper;
 
 using CommandAPI.Data;
 
@@ -43,6 +45,7 @@ namespace CommandAPI
 			(builder.ConnectionString));
 			
 			services.AddControllers();
+			services.AddAutoMapper(AppDomain.CurrentDomain.GetAssemblies());
 			//services.AddScoped<ICommandAPIRepo, MockCommandAPIRepo>();
 			services.AddScoped<ICommandAPIRepo, SqlCommandAPIRepo>();
 		}
