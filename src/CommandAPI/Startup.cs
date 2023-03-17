@@ -1,3 +1,9 @@
+using System.Data;
+using System.Text;
+using System.Reflection.Emit;
+using System.Reflection.Metadata;
+using System.Reflection;
+using System.Collections.Immutable;
 using System.Runtime.InteropServices;
 using System;
 using System.Collections.Generic;
@@ -10,6 +16,7 @@ using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Configuration;
 using Microsoft.EntityFrameworkCore;
+using  MySql.Data.MySqlClient;
 
 using CommandAPI.Data;
 
@@ -27,8 +34,14 @@ namespace CommandAPI
 		// For more information on how to configure your application, visit https://go.microsoft.com/fwlink/?LinkID=398940
 		public void ConfigureServices(IServiceCollection services)
 		{
+			var builder = new MySqlConnectionStringBuilder();
+			builder.ConnectionString = Configuration.GetConnectionString("MySqlConnection");
+			builder.UserID = Configuration["UserID"];
+			builder.Password = Configuration["Password"];
+			
 			services.AddDbContext<CommandContext>(opt => opt.UseMySql
-			(Configuration.GetConnectionString("MysqlConnection")));
+			(builder.ConnectionString));
+			
 			services.AddControllers();
 			//services.AddScoped<ICommandAPIRepo, MockCommandAPIRepo>();
 			services.AddScoped<ICommandAPIRepo, SqlCommandAPIRepo>();
